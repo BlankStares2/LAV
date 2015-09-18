@@ -5,7 +5,7 @@ require 'minitest/pride'
 # Include both the migration and the app itself
 require './migration'
 require './application'
-
+ActiveRecord::Migration.verbose = false
 # Overwrite the development database connection with a test connection.
 ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
@@ -27,11 +27,42 @@ class ApplicationTest < Minitest::Test
 
 
   def test_schools_have_terms
-    code = School.new(name: "Code")
-    fall = Term.new(name: "Fall")
+    school = School.new(name: "Code")
+    term = Term.new(name: "Fall")
 
-    code.add_term(fall)
+    school.add_term(term)
 
-    assert "Fall", code.terms.first.name
+    assert "Fall", school.terms.first.name
   end
+
+  def test_terms_have_courses
+    term = Term.new(name: "Fall")
+    course = Course.new(name: "Basket Weaving")
+
+    term.add_course(course)
+
+    assert "Backet Weaving", term.courses.first.name
+  end
+
+  def test_destroy_term
+    term = Term.new(name: "Fall")
+    course = Course.new(name: "Basket Weaving")
+
+    term.add_course(course)
+     term.destroy
+     #puts term.errors.each {|e| puts e}
+     refute term.destroyed?
+  end
+
+
+
+
+
+
+
+
+
+
+
+
 end
