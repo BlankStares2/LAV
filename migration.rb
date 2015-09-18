@@ -41,6 +41,7 @@ class ApplicationMigration < ActiveRecord::Migration
 
     create_table "course_instructors", force: true do |t|
       t.integer  "course_id"
+      t.string   "name"
       t.integer  "instructor_id"
       t.boolean  "primary"
       t.datetime "created_at"

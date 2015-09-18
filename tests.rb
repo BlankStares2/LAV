@@ -66,4 +66,21 @@ class ApplicationTest < Minitest::Test
     assert course.destroyed?
   end
 
+  def test_courses_have_course_instructors
+    course = Course.new(name: "Math101")
+    instructor1 = CourseInstructor.new(name: "Mr. Anderson")
+    course.add_instructor(instructor1)
+
+    assert "Mr. Anderson", course.course_instructors.first.name
+  end
+
+  def test_destroy_course
+    course = Course.new(name: "Math101")
+    instructor1 = CourseInstructor.new(name: "Mr. Anderson")
+    course.add_instructor(instructor1)
+
+    course.destroy
+    refute course.destroyed?
+  end
+
 end
