@@ -38,4 +38,32 @@ class ApplicationTest < Minitest::Test
     assert "Addition", lesson.readings.first.name
   end
 
+  def test_destroy_lessons
+    lesson = Lesson.new(name: "Math")
+    reading = Reading.new(name: "Addition")
+    lesson.add_reading(reading)
+
+    lesson.destroy
+    #puts "#{lesson.destroyed?}"
+
+    assert lesson.destroyed?
+  end
+
+  def test_courses_have_lessons
+    lesson = Lesson.new(name: "Math")
+    course = Course.new(name: "Math101")
+
+    course.add_lessons(lesson)
+    assert "Math", course.lessons.first.name
+  end
+
+  def test_destroy_course
+    lesson = Lesson.new(name: "Math")
+    course = Course.new(name: "Math101")
+    course.add_lessons(lesson)
+
+    course.destroy
+    assert course.destroyed?
+  end
+
 end
