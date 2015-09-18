@@ -54,6 +54,26 @@ class ApplicationTest < Minitest::Test
      refute term.destroyed?
   end
 
+  def test_course_have_students
+    student = CourseStudent.new(name: "Pall")
+    course = Course.new(name: "Basket Weaving")
+
+    course.add_student(student)
+
+    assert "Pall", course.course_students.first.name
+  end
+
+  def test_destroy_course
+    student = CourseStudent.new(name: "Pall")
+    course = Course.new(name: "Basket Weaving")
+
+    course.add_student(student)
+
+     course.destroy
+     #puts term.errors.each {|e| puts e}
+     refute course.destroyed?
+  end
+
 
 
 

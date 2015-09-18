@@ -48,6 +48,7 @@ class ApplicationMigration < ActiveRecord::Migration
     end
 
     create_table "course_students", force: true do |t|
+      t.string   "name"
       t.integer  "student_id"
       t.integer  "course_id"
       t.float    "final_grade"
