@@ -93,10 +93,10 @@ class ApplicationTest < Minitest::Test
     assert "How to do Jumping Jacks", course.readings.name
   end
 
-  def test_schools_must_have_name
-    s = School.new()
-    refute s.save
-  end
+  # def test_schools_must_have_name
+  #   s = School.new()
+  #   refute s.save
+  # end
 
   def test_terms_have_name_startson_endson_schoolid
     t = Term.new()
