@@ -113,6 +113,7 @@ class ApplicationTest < Minitest::Test
 
     assert "Basket Weaving", school.courses.name
 
+ 
   end
 
 
