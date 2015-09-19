@@ -13,7 +13,7 @@ class School < ActiveRecord::Base
   def add_term(t)
     terms << t
   end
-
+ 
 
 
 end

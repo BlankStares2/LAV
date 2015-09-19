@@ -2,7 +2,7 @@
 ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
   database: 'test.sqlite3'
-)
+) 
 class Term < ActiveRecord::Base
   has_many :courses, dependent: :restrict_with_error
   belongs_to :school
@@ -13,7 +13,7 @@ class Term < ActiveRecord::Base
   def add_course(c)
     courses << c
   end
-  
+
   def school_name
     school ? school.name : "None"
   end

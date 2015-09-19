@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
 
   delegate :starts_on, to: :term, prefix: true
   delegate :ends_on, to: :term, prefix: true
-
+ 
 
 
   def self.example_courses
