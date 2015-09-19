@@ -104,7 +104,24 @@ class ApplicationTest < Minitest::Test
     refute lesson.save
   end
 
+  def test_validate_readings_have_order_number_lesson_id_url
+    reading = Lesson.new()
+    refute reading.save
+  end
 
+  def test_url_starts_with_reg_expression
+    book = Reading.new(url: "http://www.ok.com")
+    refute book.save
+
+
+    # def test_validation_of_regex
+    #     Reading.new(url: "https//rickroll.com")
+    #     r = Reading.new(url: "www.rickroll.com")
+    #     refute r.save
+    #  end
+
+
+  end
 
 
 
