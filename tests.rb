@@ -2,8 +2,6 @@
 require 'active_record'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lesson'
-require './reading'
 require 'byebug'
 
 # Include both the migration and the app itself
@@ -112,10 +110,12 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_firstname_lastname_email
-    u = User.new(first_name: "Korey", last_name: "Littlewater", email: "koreywithak@littlewater.com")
-    refute_equal u.first_name, nil
-    refute_equal u.last_name, nil
-    refute_equal u.email, nil
+    user = User.new(first_name: "Korey", last_name: "Littlewater", email: "koreywithak@littlewater.com")
+    assert "Korey", user.first_name
+    assert "Littlewater", user.last_name
+    assert "koreywithak@littlewater.com", user.email
   end
+
+  
 
 end
