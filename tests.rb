@@ -123,4 +123,22 @@ class ApplicationTest < Minitest::Test
     refute user_email.save
   end
 
+  def test_email_has_appropriate_form
+    assert User.create(email: "koreywithak@littlewater.com")
+
+    email1 = User.new(email: "koreywithak@littlewater.com")
+    email2 = User.new(email: "koreywithaklittlewater.com")
+    email3 = User.new(email: "koreywithak@@littlewater.com")
+    email4 = User.new(email: "koreywithak@littlewatercom")
+
+    refute email1.save
+    refute email2.save
+    refute email3.save
+    refute email4.save
+  end
+
+  # def test_users_photo_url
+  #
+  # end
+
 end
