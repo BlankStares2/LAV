@@ -93,21 +93,21 @@ class ApplicationTest < Minitest::Test
     assert "How to do Jumping Jacks", course.readings.name
   end
 
-  # def test_schools_must_have_name
-  #   s = School.new()
-  #   refute s.save
-  # end
+  def test_schools_must_have_name
+    s = School.new()
+    refute s.save
+  end
 
   def test_terms_have_name_startson_endson_schoolid
     t = Term.new()
     refute t.save
   end
 
-  # def test_firstname_lastname_email
-  #   u = User.new(first_name: "Korey", last_name: "Littlewater", email: "koreywithak@littlewater.com")
-  #   refute_equal u.first_name, nil
-  #   refute_equal u.last_name, nil
-  #   refute_equal u.email, nil
-  # end
+  def test_firstname_lastname_email
+    u = User.new(first_name: "Korey", last_name: "Littlewater", email: "koreywithak@littlewater.com")
+    refute_equal u.first_name, nil
+    refute_equal u.last_name, nil
+    refute_equal u.email, nil
+  end
 
 end
