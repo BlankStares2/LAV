@@ -116,6 +116,11 @@ class ApplicationTest < Minitest::Test
     assert "koreywithak@littlewater.com", user.email
   end
 
-  
+  def test_user_email_unique
+    assert User.create(email: "koreywithak@littlewater.com")
+
+    user_email = User.new(email: "koreywithak@littlewater.com")
+    refute user_email.save
+  end
 
 end
