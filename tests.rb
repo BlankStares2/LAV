@@ -93,6 +93,14 @@ class ApplicationTest < Minitest::Test
     assert "How to do Jumping Jacks", course.readings.name
   end
 
+  def course_has_inclass_assignment
+    lesson = Lesson.new(name: "Exercise Basics")
+    assignment = Assignment.new(name: "Do 10 Jumping Jacks")
+    assignment.lessons << lesson
+
+    assert_equal assignment.id, lesson.in_class_assignment_id
+  end
+
   def test_schools_must_have_name
     s = School.new()
     refute s.save
