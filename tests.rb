@@ -35,7 +35,7 @@ class ApplicationTest < Minitest::Test
     reading = Reading.new(name: "Addition")
 
     lesson.add_reading(reading)
-    assert "Addition", lesson.readings.first.name
+    assert_equal "Addition", lesson.readings.first.name
   end
 
   def test_destroy_lessons
@@ -54,7 +54,7 @@ class ApplicationTest < Minitest::Test
     course = Course.new(name: "Math101")
 
     course.add_lessons(lesson)
-    assert "Math", course.lessons.first.name
+    assert_equal "Math", course.lessons.first.name
   end
 
   def test_destroy_course
@@ -63,7 +63,7 @@ class ApplicationTest < Minitest::Test
     course.add_lessons(lesson)
 
     course.destroy
-    assert course.destroyed?
+    assert_equal course.destroyed?
   end
 
   def test_courses_have_course_instructors
@@ -71,7 +71,7 @@ class ApplicationTest < Minitest::Test
     instructor1 = CourseInstructor.new(name: "Mr. Anderson")
     course.add_instructor(instructor1)
 
-    assert "Mr. Anderson", course.course_instructors.first.name
+    assert_equal "Mr. Anderson", course.course_instructors.first.name
   end
 
   def test_destroy_course
@@ -81,6 +81,16 @@ class ApplicationTest < Minitest::Test
 
     course.destroy
     refute course.destroyed?
+  end
+
+  def test_course_has_readings_through_lessons
+    course = Course.new(name: "PE")
+    lesson = Lesson.new(name: "Exercise Basics")
+    reading = Reading.new(name: "How to do Jumping Jacks")
+    course.add_lessons(lesson)
+    lesson.add_reading(reading)
+
+    assert "How to do Jumping Jacks", course.readings.name
   end
 
 end
