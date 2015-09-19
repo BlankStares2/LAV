@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
   belongs_to :terms
   has_many :course_students, dependent: :restrict_with_error
   has_many :assignments, dependent: :destroy
+  validates :course_code, :name, presence: true
 
   default_scope { order("courses.term_id DESC, courses.course_code, courses.id DESC") }
 
@@ -18,7 +19,7 @@ class Course < ActiveRecord::Base
 
   delegate :starts_on, to: :term, prefix: true
   delegate :ends_on, to: :term, prefix: true
- 
+
 
 
   def self.example_courses
