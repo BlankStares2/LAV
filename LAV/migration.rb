@@ -26,6 +26,15 @@ class ApplicationMigration < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
+    create_table "pre_class_assignment", force: true do |t|
+      t.integer  "assignment_id"
+      t.text     "question"
+      t.integer  "points"
+      t.integer  "order_number"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
     create_table "assignments", force: true do |t|
       t.string   "name"
       t.integer  "course_id"

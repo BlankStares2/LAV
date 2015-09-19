@@ -1,5 +1,12 @@
-class Assignment < ActiveRecord::Base
 
+ActiveRecord::Base.establish_connection(
+  adapter:  'sqlite3',
+  database: 'development.sqlite3'
+)
+
+class Assignment < ActiveRecord::Base
+belongs_to :course
+has_many :lessons, foreign_key: :pre_class_assignment_id
   scope :active_for_students, -> { where("active_at <= ? AND due_at >= ? AND students_can_submit = ?", Time.now, Time.now, true) }
 
   delegate :code_and_name, :color, to: :course, prefix: true

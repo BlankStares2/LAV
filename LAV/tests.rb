@@ -74,9 +74,46 @@ class ApplicationTest < Minitest::Test
      refute course.destroyed?
   end
 
+  def test_course_have_assignments
+    assignment = Assignment.new(name: "Homework")
+    course = Course.new(name: "Basket Weaving")
 
+    course.add_assignment(assignment)
 
+    assert_equal "Homework", course.assignments.first.name
+  end
 
+  def test_destroy_course
+    assignment = Assignment.new(name: "Homework")
+    course = Course.new(name: "Basket Weaving")
+
+    course.add_assignment(assignment)
+     course.destroy
+     #puts term.errors.each {|e| puts e}
+     assert course.destroyed?
+  end
+
+  def test_course_have_pre_class_assignments
+    assignment = Assignment.new(name: "Data Entry")
+    lesson = Lesson.new(name: "Database")
+    lesson2 = Lesson.new(name: "Database2")
+
+    assignment.lessons << lesson2
+
+    assert assignment.id == lesson2.pre_class_assignment_id
+  end
+
+  def test_school_has_courses_through_terms
+    school = School.new(name: "Code")
+    course = Course.new(name: "Basket Weaving")
+    term = Term.new(name: "Fall")
+
+    school.add_term(term)
+    term.add_course(course)
+
+    assert "Basket Weaving", school.courses.name
+
+  end
 
 
 

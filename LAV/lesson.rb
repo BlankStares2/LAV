@@ -6,12 +6,18 @@ ActiveRecord::Base.establish_connection(
 
 
 class Lesson < ActiveRecord::Base
-  
+  belongs_to :assignment
+
   delegate :code_and_name, to: :course, prefix: true
 
   scope :roots, -> { where("parent_lesson_id IS NULL") }
   scope :without_day_assignments, -> { where("day_assignment_id IS NULL") }
   scope :without_night_assignments, -> { where("night_assignment_id IS NULL") }
+
+  # def add_pre_class_assignment(pca)
+  #   pre_class_assignments << pca
+  # end
+
 
   def self.linked_to_assignment(assignment)
     found_lesson = where(pre_class_assignment_id: assignment.id).first

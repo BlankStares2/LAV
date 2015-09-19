@@ -7,6 +7,7 @@ ActiveRecord::Base.establish_connection(
 class Course < ActiveRecord::Base
   belongs_to :terms
   has_many :course_students, dependent: :restrict_with_error
+  has_many :assignments, dependent: :destroy
 
   default_scope { order("courses.term_id DESC, courses.course_code, courses.id DESC") }
 
@@ -26,6 +27,10 @@ class Course < ActiveRecord::Base
 
   def add_student(s)
     course_students << s
+  end
+
+  def add_assignment(a)
+    assignments << a
   end
 
   # Magic number also used in :active scope above.
