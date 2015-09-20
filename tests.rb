@@ -161,5 +161,14 @@ class ApplicationTest < Minitest::Test
     refute a3.save
   end
 
+  def test_assignment_name_unique_within_given_courseid
+    assign_name1 = Assignment.new(course_id: 123, name: "Art assignment", percent_of_grade: 10.0)
+    assign_name2 = Assignment.new(course_id: 123, name: "Spanish test", percent_of_grade: 10.0)
+    assign_name3 = Assignment.new(course_id: 123, name: "Art assignment", percent_of_grade: 25.0)
+
+    assert assign_name1.save
+    assert assign_name2.save
+    refute assign_name3.save
+  end
 
 end
