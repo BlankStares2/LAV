@@ -9,6 +9,8 @@ class Course < ActiveRecord::Base
   has_many :course_students, dependent: :restrict_with_error
   has_many :assignments, dependent: :destroy
   validates :course_code, :name, presence: true
+  validates :course_code, uniqueness: true
+  validates :course_code, format: {with: /\A\w{3}\s?\d{3}\z/, on: :create}
 
   default_scope { order("courses.term_id DESC, courses.course_code, courses.id DESC") }
 

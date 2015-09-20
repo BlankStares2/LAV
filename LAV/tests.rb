@@ -1,7 +1,7 @@
 # Basic test requires
 require 'minitest/autorun'
 require 'minitest/pride'
-
+require 'byebug'
 # Include both the migration and the app itself
 require './migration'
 require './application'
@@ -110,14 +110,38 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_url_starts_with_reg_expression
-    book = Reading.new(url: "http://www.ok.com")
+    assert Reading.new(url: "http://www.ok.com", lesson_id: 2, order_number: 2)
+    book = Reading.new(url: "www.ok.com", lesson_id: 3, order_number: 3)
     refute book.save
+    book2 = Reading.new(url: ".com", lesson_id: 4, order_number: 4)
+    refute book2.save
+    book3 = Reading.new(url: "http://www.ok.com", lesson_id: 2, order_number: 2)
+    assert book3.save
   end
 
   def test_courses_have_code_and_name
-    course = Course.new(name: "http://www.ok.com")
+    assert Course.new(name: "Math", course_code: "MTH101")
+    course = Course.new(course_code: "MATH")
+    refute course.save
+    course2 = Course.new(name: "brohemionrapsity")
+    refute course.save
+    course3 = Course.new()
     refute course.save
   end
+
+  def test_course_code_through_terms
+    course1 =  Course.create(name: "Math", course_code: "Math101")
+    course2 = Course.create(name: "Advanced Functions and Modeling", course_code: "Math101")
+
+    refute course1 == course2
+  end
+
+  def test_course_code_three_letters_and_three_numbers
+    Course.new(name: "Basket Weaving", course_code: "WEV101")
+    beer = Course.new(name: "Brewing", course_code: "369BER")
+    refute beer.save
+  end
+
 
 
 
