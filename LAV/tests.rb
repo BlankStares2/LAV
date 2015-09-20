@@ -140,9 +140,5 @@ class ApplicationTest < Minitest::Test
     Course.new(name: "Basket Weaving", course_code: "WEV101")
     beer = Course.new(name: "Brewing", course_code: "369BER")
     refute beer.save
-  end
-
-
-
- 
+  end 
 end
