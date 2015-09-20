@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
   database: 'development.sqlite3'
 )
-
+ 
 class User < ActiveRecord::Base
 
   scope :want_to_be_instructors, -> { where(wants_to_be_instructor: true) }

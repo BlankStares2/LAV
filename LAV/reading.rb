@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   database: 'development.sqlite3'
 )
 
-
+ 
 class Reading < ActiveRecord::Base
   validates :order_number, :lesson_id,:url, presence: true
   # validates :url, uniqueness: true

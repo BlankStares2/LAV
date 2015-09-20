@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
   database: 'test.sqlite3'
 )
-
+ 
 class School < ActiveRecord::Base
   has_many :terms
   has_many :courses, through: :terms
@@ -13,7 +13,7 @@ class School < ActiveRecord::Base
   def add_term(t)
     terms << t
   end
- 
+
 
 
 end

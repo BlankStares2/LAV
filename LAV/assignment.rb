@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
   database: 'development.sqlite3'
 )
-
+ 
 class Assignment < ActiveRecord::Base
 belongs_to :course
 has_many :lessons, foreign_key: :pre_class_assignment_id

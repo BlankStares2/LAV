@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
   database: 'development.sqlite3'
 )
-
+ 
 class Course < ActiveRecord::Base
   belongs_to :terms
   has_many :course_students, dependent: :restrict_with_error

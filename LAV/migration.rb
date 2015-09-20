@@ -65,7 +65,7 @@ class ApplicationMigration < ActiveRecord::Migration
       t.datetime "updated_at"
       t.boolean  "approved"
     end
-
+ 
     create_table "courses", force: true do |t|
       t.string   "name"
       t.string   "course_code"

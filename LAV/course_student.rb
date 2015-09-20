@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
   database: 'development.sqlite3'
 )
-
+ 
 
 class CourseStudent < ActiveRecord::Base
 belongs_to :course
