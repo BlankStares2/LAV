@@ -117,19 +117,19 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_user_email_unique
-    assert User.create(email: "koreywithak@littlewater.com")
+    assert User.new(email: "koreywithak@littlewater.com")
 
     user_email = User.new(email: "koreywithak@littlewater.com")
     refute user_email.save
   end
 
   def test_email_has_appropriate_form
-    assert User.create(email: "koreywithak@littlewater.com")
+    assert User.new(email: "koreywithak@littlewater.com")
 
-    email1 = User.new(email: "koreywithak@littlewater.com")
-    email2 = User.new(email: "koreywithaklittlewater.com")
-    email3 = User.new(email: "koreywithak@@littlewater.com")
-    email4 = User.new(email: "koreywithak@littlewatercom")
+    email1 = User.new(first_name: "Jesse", last_name: "Duke", email: "jesse@duke.com")
+    email2 = User.new(first_name: "Bo", last_name: "Duke", email: "boduke.com")
+    email3 = User.new(first_name: "Luke", last_name: "Duke", email: "luke@@duke.com")
+    email4 = User.new(first_name: "Daisy", last_name: "Duke", email: "daisy@dukecom")
 
     refute email1.save
     refute email2.save
@@ -137,8 +137,18 @@ class ApplicationTest < Minitest::Test
     refute email4.save
   end
 
-  # def test_users_photo_url
-  #
-  # end
+  def test_users_photo_url
+    assert User.new(photo_url: "https://www.photo.com", first_name: "Jesse", last_name: "Duke", email: "jesse@duke.com")
+
+    url1 = User.new(photo_url: "https://www.photo.com", first_name: "Jesse", last_name: "Duke", email: "jesse@duke.com")
+    url2 = User.new(photo_url: "www.photo.com", first_name: "Bo", last_name: "Duke", email: "boduke.com")
+    url3 = User.new(photo_url: ".com", first_name: "Luke", last_name: "Duke", email: "luke@@duke.com")
+    url4 = User.new(photo_url: " ", first_name: "Daisy", last_name: "Duke", email: "daisy@dukecom")
+
+    assert url1.save
+    refute url2.save
+    refute url3.save
+    refute url4.save
+  end
 
 end
