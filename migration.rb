@@ -99,7 +99,6 @@ class ApplicationMigration < ActiveRecord::Migration
 
     create_table "readings", force: true do |t|
       t.integer  "lesson_id"
-      # t. references :lesson
       t.string   "name"
       t.string   "caption"
       t.string   "url"

@@ -100,13 +100,13 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_schools_must_have_name
-    s = School.new()
-    refute s.save
+    school = School.new()
+    refute school.save
   end
 
   def test_terms_have_name_startson_endson_schoolid
-    t = Term.new()
-    refute t.save
+    term = Term.new()
+    refute term.save
   end
 
   def test_firstname_lastname_email
@@ -150,5 +150,16 @@ class ApplicationTest < Minitest::Test
     refute url3.save
     refute url4.save
   end
+
+  def test_assignments_have_course_id_name_percent_of_grad
+    a1 = Assignment.new(course_id: 123, name: "Write essay", percent_of_grade: 10.0)
+    a2 = Assignment.new(course_id: 124, name: "Mutliplication")
+    a3 = Assignment.new(name: "Science project")
+
+    assert a1.save
+    refute a2.save
+    refute a3.save
+  end
+
 
 end
