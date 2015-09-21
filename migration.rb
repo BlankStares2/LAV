@@ -41,6 +41,7 @@ class ApplicationMigration < ActiveRecord::Migration
 
     create_table "course_instructors", force: true do |t|
       t.integer  "course_id"
+      t.string   "name"
       t.integer  "instructor_id"
       t.boolean  "primary"
       t.datetime "created_at"
@@ -98,6 +99,7 @@ class ApplicationMigration < ActiveRecord::Migration
 
     create_table "readings", force: true do |t|
       t.integer  "lesson_id"
+      t.string   "name"
       t.string   "caption"
       t.string   "url"
       t.integer  "order_number"

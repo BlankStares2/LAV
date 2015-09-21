@@ -1,4 +1,15 @@
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'dev.sqlite3'
+)
+
+
 class Course < ActiveRecord::Base
+  has_many :lessons, dependent: :destroy
+  has_many :course_instructors, dependent: :restrict_with_error
+  has_many :readings, through: :lessons
 
   default_scope { order("courses.term_id DESC, courses.course_code, courses.id DESC") }
 
@@ -9,6 +20,14 @@ class Course < ActiveRecord::Base
 
   delegate :starts_on, to: :term, prefix: true
   delegate :ends_on, to: :term, prefix: true
+
+  def add_lessons(l)
+    lessons << l
+  end
+
+  def add_instructor(i)
+    course_instructors << i
+  end
 
   def self.example_courses
     self.where(public: true).order("id DESC").first(5)

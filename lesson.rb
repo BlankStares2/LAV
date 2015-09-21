@@ -1,9 +1,24 @@
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'dev.sqlite3'
+)
+
 class Lesson < ActiveRecord::Base
+  has_many :readings, dependent: :destroy
+  belongs_to :courses
+  belongs_to :assignment
+
   delegate :code_and_name, to: :course, prefix: true
 
   scope :roots, -> { where("parent_lesson_id IS NULL") }
   scope :without_day_assignments, -> { where("day_assignment_id IS NULL") }
   scope :without_night_assignments, -> { where("night_assignment_id IS NULL") }
+
+  def add_reading(r)
+    readings << r
+  end
 
   def self.linked_to_assignment(assignment)
     found_lesson = where(pre_class_assignment_id: assignment.id).first
